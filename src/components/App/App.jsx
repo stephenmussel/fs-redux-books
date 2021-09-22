@@ -1,17 +1,49 @@
 import BookList from '../BookList/BookList';
 import BookForm from '../BookForm/BookForm';
+// NO. 3: to render on page load
+import { useEffect } from 'react';
+// NO. 2
+import axios from 'axios';
+// NO. 6
+import { useDispatch } from 'react-redux';
 
 import './App.css';
 
 function App() {
 
+  // NO. 7
+  const dispatch = useDispatch();
+
   // TODO - GET Book List from server
+  // NO. 4
+  useEffect(() => {
+    fetchBookList();
+  }, []);
+
+  // NO. 5
+  const fetchBookList = () => {
+    axios({
+      method: 'GET',
+      // open up server.js
+      url: '/books',
+    }).then(response => {
+      console.log(response.data);
+      // const action = {type: 'SET_BOOK_LIST', payload: response.data,}
+      // NO. 7
+      // NOTES: this sends data (list of books) to reducer (bookList)
+      dispatch({
+        type: 'SET_BOOK_LIST', 
+        payload: response.data,
+      });
+    }) // TODO add catch
+  }
 
   return (
     <div className="App">
       <header><h1>Books w/ Redux!</h1></header>
       <main>
-        <BookForm />
+        {/* STEP 3 */}
+        <BookForm fetchBookList={fetchBookList}/>
         <BookList />
       </main>
     </div>

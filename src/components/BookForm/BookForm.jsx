@@ -1,6 +1,9 @@
 import {useState} from 'react';
+// STEP 1
+import axios from 'axios';
 
-function BookForm() {
+// STEP 4: pass via props from App.jsx
+function BookForm({fetchBookList}) {
   const [title, setTitle] = useState('');
   const [author, setAuthor] = useState('');
 
@@ -10,7 +13,20 @@ function BookForm() {
     console.log(`Adding book`, {title, author});
 
     // TODO - axios request to server to add book
-
+    // STEP 2
+    axios({
+      method: 'POST',
+      url: '/books',
+      data: {
+        title: title,
+        author: author,
+      }
+    }).then(response => {
+      // GET book list
+      // STEP 5
+      // can't send function to store. instead sent function via props
+      fetchBookList();
+    })
   };
 
   return (

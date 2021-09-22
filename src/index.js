@@ -7,9 +7,17 @@ import './index.css';
 import App from './components/App/App';
 import * as serviceWorker from './serviceWorker';
 
-
+// reducers provided at highest level (index.js)
+// data provided by useSelector from store (Booklist.jsx)
 const bookList = (state = [], action) => {
   // TODO - set book list with data from server
+  // NO. 1
+  // if bookList doesn't change, React doesn't render the page, 
+  // ...only on change
+  if (action.type === 'SET_BOOK_LIST') {
+    return action.payload;
+  }
+  // no change to data
   return state;
 }
 

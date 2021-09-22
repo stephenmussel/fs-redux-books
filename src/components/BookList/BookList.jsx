@@ -1,6 +1,7 @@
 import {useSelector} from 'react-redux'
 
 function BookList() {
+  // NOTES: this gets data from store
   const bookList = useSelector(store => store.bookList);
 
   return (
