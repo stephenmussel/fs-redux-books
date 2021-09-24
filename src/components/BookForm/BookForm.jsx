@@ -3,7 +3,7 @@ import {useState} from 'react';
 import axios from 'axios';
 
 // STEP 4: pass via props from App.jsx
-function BookForm({fetchBookList}) {
+function BookForm() {
   const [title, setTitle] = useState('');
   const [author, setAuthor] = useState('');
 
@@ -25,7 +25,6 @@ function BookForm({fetchBookList}) {
       // GET book list
       // STEP 5
       // can't send function to store. instead sent function via props
-      fetchBookList();
     })
   };
 

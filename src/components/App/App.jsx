@@ -6,9 +6,13 @@ import { useEffect } from 'react';
 import axios from 'axios';
 // NO. 6
 import { useDispatch } from 'react-redux';
-
 import './App.css';
+// NOTES 1: importing for Router
+import { HashRouter as Router, Route } from 'react-router-dom';
+import ConfirmBook from '../ConfirmBook/ConfirmBook';
 
+
+// NOTES: App is currently making GET request
 function App() {
 
   // NO. 7
@@ -42,9 +46,16 @@ function App() {
     <div className="App">
       <header><h1>Books w/ Redux!</h1></header>
       <main>
+        <Router>
+          {/* component={BookList} is passing props */}
+          <Route exact path="/" component={BookList} />
+          <Route exact path="/add" component={BookForm} />
+          <Route exact path="/confirm" component={ConfirmBook} />
+
+        </Router>
         {/* STEP 3 */}
-        <BookForm fetchBookList={fetchBookList}/>
-        <BookList />
+      
+        {/* <BookList /> */}
       </main>
     </div>
   );
